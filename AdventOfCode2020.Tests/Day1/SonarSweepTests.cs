@@ -21,5 +21,13 @@ namespace AdventOfCode2020.Tests.Day1
             var result = _sonarSweep.CountDepthMeasurementIncreases(data);
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [JsonFileData("Day1/testData.json", "Part2", typeof(List<int>), typeof(int))]
+        public void GetTotalFuelRequirementWhenFuelHasMassReturnCorrectTotalFuelRequirement(List<int> data, int expectedResult)
+        {
+            var result = _sonarSweep.CountDepthSlidingSumMeasurementIncreases(data);
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
