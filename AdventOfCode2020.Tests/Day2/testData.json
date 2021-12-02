@@ -1027,7 +1027,7 @@
         "down 8",
         "forward 2"
       ],
-      "result": 150
+      "result": 900
     },
     {
       "data": [
@@ -2032,7 +2032,7 @@
         "down 1",
         "forward 2"
       ],
-      "result": 0
+      "result": 1982495697
     }
   ]
 }

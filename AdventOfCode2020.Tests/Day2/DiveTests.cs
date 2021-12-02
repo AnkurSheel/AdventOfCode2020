@@ -21,5 +21,13 @@ namespace AdventOfCode2020.Tests.Day2
             var result = _dive.GetPositionMultiplicationResult(data);
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [JsonFileData("Day2/testData.json", "Part2", typeof(List<string>), typeof(int))]
+        public void GetPositionAimMultiplicationResult(List<string> data, int expectedResult)
+        {
+            var result = _dive.GetPositionAimMultiplicationResult(data);
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
