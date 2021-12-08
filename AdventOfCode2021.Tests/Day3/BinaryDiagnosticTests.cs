@@ -15,14 +15,18 @@ namespace AdventOfCode2021.Tests.Day3
         }
 
         [Theory]
-        [JsonFileData(
-            "Day3/testData.json",
-            "Part1",
-            typeof(List<string>),
-            typeof(int))]
+        [JsonFileData("Day3/testData.json", "Part1", typeof(List<string>), typeof(int))]
         public void GetPowerConsumption(List<string> data, int expectedResult)
         {
             var result = _binaryDiagnostic.GetPowerConsumption(data);
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Theory]
+        [JsonFileData("Day3/testData.json", "Part2", typeof(List<string>), typeof(int))]
+        public void GetLifeSupportRating(List<string> data, int expectedResult)
+        {
+            var result = _binaryDiagnostic.GetLifeSupportRating(data);
             Assert.Equal(expectedResult, result);
         }
     }

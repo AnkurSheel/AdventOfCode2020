@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AdventOfCode2021.Day3
@@ -48,6 +49,54 @@ namespace AdventOfCode2021.Day3
             var gammaRateInDecimal = Convert.ToInt32(gammaRate.ToString(), 2);
             var epsilonRateInDecimal = Convert.ToInt32(epsilonRate.ToString(), 2);
             return gammaRateInDecimal * epsilonRateInDecimal;
+        }
+
+        public int GetLifeSupportRating(List<string> data)
+        {
+            var oxygenGeneratorRating = GetOxygenGeneratorRating(data, (numberOfZeros, numberOfOnes) => numberOfZeros > numberOfOnes);
+            var co2ScrubberRating = GetOxygenGeneratorRating(data, (numberOfZeros, numberOfOnes) => numberOfZeros <= numberOfOnes);
+
+            var oxygenGeneratorRatingInDecimal = Convert.ToInt32(oxygenGeneratorRating, 2);
+            var co2ScrubberRatingInDecimal = Convert.ToInt32(co2ScrubberRating, 2);
+            return oxygenGeneratorRatingInDecimal * co2ScrubberRatingInDecimal;
+        }
+
+        private string GetOxygenGeneratorRating(IReadOnlyList<string> data, Func<int, int, bool> keepZero)
+        {
+            var updatedList = new List<string>(data);
+            var bitToConsider = 0;
+            var filter = new StringBuilder();
+
+            while (true)
+            {
+                var numberOfZeros = 0;
+                var numberOfOnes = 0;
+
+                if (updatedList.Count == 1)
+                {
+                    return updatedList.Single();
+                }
+
+                foreach (var binaryNumber in updatedList)
+                {
+                    switch (binaryNumber[bitToConsider])
+                    {
+                        case '0':
+                            numberOfZeros++;
+                            break;
+                        case '1':
+                            numberOfOnes++;
+                            break;
+                    }
+                }
+
+                filter.Append(
+                    keepZero(numberOfZeros, numberOfOnes)
+                        ? '0'
+                        : '1');
+                updatedList = updatedList.Where(x => x.StartsWith(filter.ToString())).ToList();
+                bitToConsider++;
+            }
         }
     }
 }
